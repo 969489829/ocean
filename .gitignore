@@ -5,3 +5,4 @@
 /Test/.settings
 /Test/target
 /Test/*.classpath
+/Test/*.project
