@@ -1,0 +1,7 @@
+/DesignMode/*.classpath
+/DesignMode/*.project
+/DesignMode/.settings
+/DesignMode/bin
+/Test/.settings
+/Test/target
+/Test/*.classpath
