@@ -1,20 +1,20 @@
 /******************************************************************
  * Test.java
  * Copyright jk 2018
- * CreateDate：2018年8月20日
+ * CreateDate：2018年12月27日
  * Author：jk
  ******************************************************************/
 
-package 加密;
+package 线程.semaphore并发;
 
-import gnnt.util.security.CBCDES;
+import java.util.concurrent.Semaphore;
 
 /**
  * <b>修改记录：</b> 
  * <p>
  * <li>
  * 
- *                        ---- jk 2018年8月20日
+ *                        ---- jk 2018年12月27日
  * </li>
  * </p>
  * 
@@ -24,7 +24,13 @@ import gnnt.util.security.CBCDES;
  * </p>
  */
 public class Test {
+
 	public static void main(String[] args) {
-		System.out.println(CBCDES.encode("dO29RU+IZx/KvAs51s6vSQ=="));
+		Semaphore semaphore = new Semaphore(3);
+		for (int i = 0; i < 10; i++) {
+			Thread thread = new Thread(new Task(semaphore));
+			thread.setName("线程" + i);
+			thread.start();
+		}
 	}
 }

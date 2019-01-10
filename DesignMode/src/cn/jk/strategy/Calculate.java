@@ -21,7 +21,7 @@ package cn.jk.strategy;
  * 
  * </p>
  */
-public class Calculate {
+public class Calculate implements Target{
 
 	private Target ta;
 	
@@ -30,7 +30,7 @@ public class Calculate {
 		this.ta = ta;
 	}
 
-
+	@Override
 	public double calculate(double a,double b) {
 		return ta.calculate(a, b);
 	}

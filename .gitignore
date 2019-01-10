@@ -6,3 +6,4 @@
 /Test/target
 /Test/*.classpath
 /Test/*.project
+/Test/.project

@@ -7,6 +7,13 @@
 
 package cn.jk.singleton;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.Constructor;
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * <b>修改记录：</b> 
  * <p>
@@ -23,23 +30,29 @@ package cn.jk.singleton;
  */
 public class Singleton6 {
 	
+	private static AtomicInteger flag = new AtomicInteger(0);
+	
 	private static class Loader{
 		private static final Singleton6 instance = new Singleton6();
 	}
 	
 	private Singleton6() {
-		System.out.println("加载静态内部类单例");
+		if(flag.incrementAndGet()>1)
+			throw new RuntimeException("单例模式被攻击");
 	}
 	
 	public static Singleton6 getInstance() {
 		return Loader.instance;
 	}
 	
-	public static void test() {
-		System.out.println("测试");
-	}
-
-	public static void main(String[] args) {
-		
+	public static void main(String[] args) throws Exception {
+		Singleton6 instance = Singleton6.getInstance();
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+		objectOutputStream.writeObject(instance);
+		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+		ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
+		Object readObject = objectInputStream.readObject();
+		System.out.println(instance == readObject);
 	}
 }

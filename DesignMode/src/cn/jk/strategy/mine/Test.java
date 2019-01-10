@@ -7,6 +7,9 @@
 
 package cn.jk.strategy.mine;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * <b>修改记录：</b> 
  * <p>
@@ -24,10 +27,10 @@ package cn.jk.strategy.mine;
 public class Test {
 
 	public static void main(String[] args) {
-		double a = 5;
-		double b = 2;
-		System.out.println(Strategy.div.calculate(a, b));
-		System.out.println(Strategy2.div.calculate(a, b));
-		System.out.println(Strategy2.add.calculate(a, b));
+		double a = 10,b = 5;
+		List<Integer> list = Arrays.asList(1,2,3,4);
+		list.forEach((li)->{
+			System.out.println(Strategy3.parse(li).calculate(a, b));
+		});
 	}
 }
